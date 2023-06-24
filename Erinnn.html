@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://kit.fontawesome.com/6ff5f50693.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-ejB92azC+8sT+W1vZDlnz7rXro/EVflwAPnJWUf+jcNdcS1APRyFLnmOXhs+GIWZZk6tqUx1xRdRDOJ0Gz7HCA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" type="text/css" href="erinbday.css">
+  <style>
+
+    body {
+      margin: 0;
+      overflow-y: scroll;
+      scrollbar-width: thin;
+      scrollbar-color: #888888 #f9f9f9;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background-color: #f9f9f9;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #888888;
+    }
+
+    .loading-screen {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #FFFFF0;
+      z-index: 9999;
+    }
+
+    .loading-text {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @keyframes letter-by-letter {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 100%;
+      }
+    }
+
+        /* Responsive styles for larger screens */
+    @media (min-width: 1200px) {
+    .loading-text {
+        font-size: 28px;
+      }
+    }
+    .bottom-text {
+      font-size: 16px;
+      color: #666;
+      animation: fade-in 2s ease-out 4s forwards;
+      opacity: 0;
+    }
+
+    .play-button {
+      animation: fade-in 1s ease-out 4s forwards;
+      opacity: 0;
+    }
+
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgb(176, 224, 230);
+      border-top-color: rgb(230, 230, 250);
+      border-bottom-color: rgb(255, 218, 185);
+      border-left-color: rgb(152, 251, 152);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .subCardContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 50px;
+    }
+
+    .birthdayCard {
+      position: relative;
+      margin-bottom: 50px;
+    }
+
+    .subCardsContainer {
+      display: flex;
+      justify-content: center;
+      max-height: calc(100vh - 200px); /* Adjust the value (200px) based on the height of the other elements */
+      margin-top: 50px;
+    }
+
+    .subCard {
+      width: 200px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      margin: 0 30px; /* Add margin here */
+      text-align: center;
+      flex-shrink: 0; /* Prevent subcards from shrinking when there are more cards */
+      position: relative;
+    }
+
+    .image-slide {
+      position: relative;
+      width: 400px;
+      height: 600px;
+      padding: 20px;
+      padding-bottom: 20px;
+      max-height: calc(100vh - 200px); /* Adjust the value (200px) based on the height of the subcards and any other elements you want to accommodate */
+      overflow: hidden;
+    }
+
+    .image-slide::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 20px;
+      box-shadow: 0 0 10px 5px rgba(0, 153, 255, 0.8); /* Glowing outline color */
+      opacity: 0;
+      animation: glow 1s infinite;
+    }
+
+    
+    @keyframes glow {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    
+    @media (max-width: 576px) {
+    .subCardContainer {
+      padding-top: 30px;
+    }
+
+    .subCardsContainer {
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .subCard {
+      width: 100%; /* Make subcards occupy full width on small screens */
+      margin: 10px;
+    }
+  }
+      
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="spinner"></div><br>
+    <p class="loading-text">June 25</p>
+    <p class="bottom-text">On this day, A beautiful and hardworking girl named Justin Erin Paguio was born</p>
+    <button class="play-button" onclick="playBackgroundMusic()"><i class="fas fa-play"></i></button>
+  </div>
+
+  <audio id="background-music" src="seventeen.mp3" loop></audio>
+
+  <div class="subCardContainer">
+    <div class="birthdayCard">
+      <div class="cardFront">
+        <div class="front-text">
+          <h3 class="happy">HAPPY</h3>
+          <h2 class="bday">BIRTHDAY</h2>
+          <h3 class="toyou">to you!</h3>
+        </div>
+        <div class="wrap-deco">
+          <div class="decorations"></div>
+          <div class="decorationsTwo"></div>
+        </div>
+        <div class="wrap-decoTwo">
+          <div class="decorations"></div>
+          <div class="decorationsThree"></div>
+        </div>
+        <div class="plate">
+          <div class="cake"></div>
+          <div class="flame"></div>
+        </div>
+      </div>
+      <div class="cardInside">
+        <div class="inside-text">
+          <h3 class="happy">HAPPY</h3>
+          <h2 class="bday">BIRTHDAY</h2>
+          <h3 class="toyou">MY BEBI!</h3>
+        </div>
+        <div class="wishes">
+          <p>Haloo, bebu,</p>
+          <p>Happy birthday to my pretty and hardworking bebe! Every day, your dedication and motivation inspire me a lot. I appreciate how you brighten my life and serve as constant source of inspiration, Im so proud of you always. I love youu alwaysss, my bebuuu!</p>
+          <p class="name">Immaaan</p>
+        </div>
+      </div>
+    </div>
+
+  <!-- Add the image slide using Bootstrap Carousel component -->
+  <div id="image-carousel" class="carousel slide image-slide" data-bs-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-bs-target="#image-carousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#image-carousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#image-carousel" data-bs-slide-to="2"></li>
+      <li data-bs-target="#image-carousel" data-bs-slide-to="3"></li>
+      <!-- Add more indicators for additional images if needed -->
+    </ol>
+    
+    <!-- Slides -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="Erin1.jpg" alt="Image 1" style="width: 100%; height: auto;">
+      </div>
+      <div class="carousel-item">
+        <img src="Erin2.jpg" alt="Image 2" style="width: 100%; height: auto;">
+      </div>
+      <div class="carousel-item">
+        <img src="erin4.jpg" alt="Image 3" style="width: 100%; height: auto;"> 
+      </div>
+      <div class="carousel-item">
+        <img src="erin5.jpg" alt="Image 4" style="width: 100%; height: auto;"> 
+      </div>
+      <!-- Add more carousel items for additional images if needed -->
+    </div>
+    
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#image-carousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#image-carousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+    <div class="subCardsContainer">
+      <div class="subCard">
+        <div class="cardFront">
+          <div class="front-image">
+              <img src="jessica-erin.jpg" alt="Image 1">
+          </div>
+        </div>  
+        <div class="cardInside">
+          <div class="inside-text">
+              <h3 class="happy">HAPPY</h3>
+              <h2 class="bday">BIRTHDAY</h2> 
+              <h3 class="toyou">to you!</h3>  
+          </div>
+          <div class="wishes">
+            <p>Hi Ate Ching!</p>
+            <p>I don't know on how I should construct my message cause I know we are not that affectionate to each other but nevertheless I just want to greet you a Happy happy 22th Birthday. You are such a big role model for me to work hard every single day I know you might not see it but you simply inspired me a lot to work hard. Every time I see you work at night it made me realize that I should also push myself above my comfort zone. Thank you for always reminding and giving me a push to pursue things that I didnt imagine I can do. Thank you for being our guideance to us especially that we are still facing life problems ever since mama left us. But im still amaze on  you managed to provide all of our needs and wants. Thank you so much ate! even we are having misunderstanding and abit of cruel here and there always remember I love you and I care for you as well. I hope you enjoy your special day today and more blessings to come and more mingyu and wonwoo to collect in the future hihihi.</p>
+            <p class="name">Jessica</p>
+          </div>
+        </div>
+      </div>
+      <div class="subCard">
+        <div class="cardFront">
+          <div class="front-image">
+              <img src="erol.jpg" alt="Image 1">
+            </div>
+          </div>  
+          <div class="cardInside">
+            <div class="inside-text">
+                <h3 class="happy">HAPPY</h3>
+                <h2 class="bday">BIRTHDAY</h2> 
+                <h3 class="toyou">to you!</h3>  
+            </div>
+            <div class="wishes">
+              <p>Dear Ate Justin</p>
+              <p>I know this days your having a hard time but I just wanted to say thank you for everything that you did so far for us and I am very grateful for the sacrifices that you did, and I will do my best at doing chores and having good grades at school to show my thanks to you. Thank you again for everything that you did us and I love you very 
+                much because of it.</p>
+              <p class="name">Sincerely by: <br> KuyKuy</p>
+            </div>
+          </div>
+        </div>
+        <div class="subCard">
+          <div class="cardFront">
+            <div class="front-image">
+                <img src="ghie.jpg" alt="Image 1">
+            </div>
+          </div>  
+          <div class="cardInside">
+            <div class="inside-text">
+                <h3 class="happy">HAPPY</h3>
+                <h2 class="bday">BIRTHDAY</h2> 
+                <h3 class="toyou">to you!</h3>  
+            </div>
+            <div class="wishes">
+              <p>Hai ate happy borthday <br> Libre mo nyan ako keme</p>
+              <p>Anyways happy happy birthday 
+                Thank you for everything you have done since the past year a huge sacrifice for this family instead of living your best life and buying all the albums in the world going to every concerts you stayed by our side and supported us even if its not your job you still did so , thank you for being so patience with me even if sometimes hindi ako kumakain nagiging brat ako . yung mga gusto ko food binibigay mo , yung new jeans photo cards ko you paid half , the things that you do have to do you still do it because you love us so much . and we love you too </p>
+              <p class="name"> Xoxo <br> Gilagid 💖</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <span style="--i:1"><img src="birthday1.jpg" alt=""></span>
+        <span style="--i:2"><img src="birthday2.jpg" alt=""></span>
+        <span style="--i:3"><img src="birthday3.jpg" alt=""></span>
+        <span style="--i:4"><img src="birthday4.jpg" alt=""></span>
+        <span style="--i:5"><img src="birthday5.jpg" alt=""></span>
+        <span style="--i:6"><img src="birthday6.jpg" alt=""></span>
+        <span style="--i:7"><img src="birthday7.jpg" alt=""></span> 
+        <span style="--i:8"><img src="birthday8.jpg" alt=""></span> 
+     </div>
+    </div>
+    
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var loadingText = document.querySelector('.bottom-text');
+        var playButton = document.querySelector('.play-button');
+        var subCardContainer = document.querySelector('.subCardContainer');
+    
+        setTimeout(function() {
+          loadingText.style.opacity = 1;
+          playButton.style.opacity = 1;
+          playButton.classList.add('clicked');
+          subCardContainer.classList.add('scrollable');
+        }, 4000); // 4 seconds
+      });
+    
+      function playBackgroundMusic() {
+        var audio = document.getElementById('background-music');
+        audio.play();
+        var loadingScreen = document.querySelector('.loading-screen');
+        loadingScreen.style.display = 'none';
+
+        var carousel = new bootstrap.Carousel(document.getElementById('image-carousel'));
+      }
+    </script>    
+
+  </body>
+  </html>
+  
